@@ -43,12 +43,6 @@ final class MonitorStore: ObservableObject {
 
     var isConnected: Bool { snapshot != nil && errorMessage == nil }
 
-    var menuTitle: String {
-        if host.isEmpty { return "SSH Monitor" }
-        guard isConnected, let snapshot else { return "SSH 离线" }
-        return snapshot.gpus.isEmpty ? "SSH OK" : "SSH GPU \(snapshot.maxGPUPercent)%"
-    }
-
     var statusTooltip: String {
         if host.isEmpty { return "SSH Monitor · 请配置 SSH 主机别名" }
         guard isConnected, let snapshot else { return "SSH 离线" }

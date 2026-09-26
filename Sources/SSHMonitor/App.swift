@@ -49,12 +49,11 @@ final class SSHAppDelegate: NSObject, NSApplicationDelegate, NSPopoverDelegate {
     private var previewWindow: NSWindow?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
-        let item = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+        let item = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         statusItem = item
         if let button = item.button {
             button.image = NSImage(systemSymbolName: "server.rack", accessibilityDescription: "SSH Monitor")
-            button.imagePosition = .imageLeading
-            button.font = .monospacedDigitSystemFont(ofSize: 11, weight: .medium)
+            button.imagePosition = .imageOnly
             button.target = self
             button.action = #selector(togglePopover)
             button.setAccessibilityLabel("SSH Monitor，点击查看服务器状态")
@@ -86,7 +85,7 @@ final class SSHAppDelegate: NSObject, NSApplicationDelegate, NSPopoverDelegate {
     }
 
     private func updateStatus() {
-        statusItem?.button?.title = " " + store.menuTitle
+        statusItem?.button?.title = ""
         statusItem?.button?.toolTip = store.statusTooltip
     }
 
